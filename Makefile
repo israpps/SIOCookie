@@ -1,31 +1,27 @@
-# _____     ___ ____     ___ ____
-#  ____|   |    ____|   |        | |____|
-# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
-#-----------------------------------------------------------------------
-# Copyright 2001-2022, ps2dev - http://www.ps2dev.org
-# Licenced under Academic Free License version 2.0
-# Review ps2sdk README & LICENSE files for further details.
+define HEADER 
+/_/_/_/_/_/_/_/_/_/_/
+|                   |/ 
+|    _____  _____   |/ 
+|   |      |        |/ 
+|   |_____ |_____   |/ 
+|   |      |        |/ 
+|   |_____ |_____   |/ 
+|                   |/ 
+|___________________|/ SIOCookie
 
-EE_BIN = ee_sio.elf
+written by El_isra. Idea from uyjulian
+
+endef
+export HEADER
+
+EE_LIB = SIOCookie.a
 
 # KERNEL_NOPATCH = 1
 # NEWLIB_NANO = 1
 
-EE_OBJS = main.o
+EE_OBJS = src/SIOCookie.o
 EE_CFLAGS += -fdata-sections -ffunction-sections
 EE_LDFLAGS += -Wl,--gc-sections
-
-ifeq ($(DUMMY_TIMEZONE), 1)
-   EE_CFLAGS += -DDUMMY_TIMEZONE
-endif
-
-ifeq ($(DUMMY_LIBC_INIT), 1)
-   EE_CFLAGS += -DDUMMY_LIBC_INIT
-endif
-
-ifeq ($(KERNEL_NOPATCH), 1)
-   EE_CFLAGS += -DKERNEL_NOPATCH
-endif
 
 ifeq ($(DEBUG), 1)
   EE_CFLAGS += -DDEBUG -O0 -g
@@ -34,10 +30,12 @@ else
   EE_LDFLAGS += -s
 endif
 
-all: $(EE_BIN)
+all: $(EE_LIB)
+	echo "$$HEADER"
 
 clean:
-	rm -rf $(EE_OBJS) $(EE_BIN)
+	rm -rf $(EE_OBJS) $(EE_LIB)
+
 rebuild: clean all
 
 # Include makefiles

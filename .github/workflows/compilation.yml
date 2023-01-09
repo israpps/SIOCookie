@@ -13,7 +13,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ps2dev/ps2dev:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        docker_tag: [v1.0, v1.1, v1.2.0, latest]
+    container: ps2dev/ps2dev:${{ matrix.docker_tag }}
     steps:
     - uses: actions/checkout@v3
 
@@ -25,6 +29,11 @@ jobs:
       run: |
         make rebuild ${{ matrix.flags }}
 
+    - name: Compile project
+      if: matrix.docker_tag != 'latest'
+      run: |
+        mv SIOCookie.a SIOCookie-ps2dev_${{matrix.docker_tag}}.a
+
     - name: Get short SHA
       id: slug
       run: echo "sha8=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_OUTPUT
@@ -34,4 +43,23 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ github.event.repository.name }}
-        path: ee_sio.elf
+        path: SIOCookie*.a
+
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+
+    - name: Create release
+      if: github.ref == 'refs/heads/master'
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        title: "Latest SIOCookie.a"
+        files: |
+               ${{ github.event.repository.name }}/*.a

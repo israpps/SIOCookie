@@ -23,6 +23,7 @@
     "version": 4,
     "files.associations": {
         "*.make": "makefile",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdlib.h": "c"
     }
 }
