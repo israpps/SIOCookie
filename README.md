@@ -10,9 +10,9 @@ now you wonder how to use this in your project...
 
 It's quite simple. you just need to add the library into your makefile and add the proper header file into your source file.
 
-As an example, we will use [PS2 Hello world](https://github.com/fjtrujy/helloWorldPS2) by [@fjtrujy](github.com/fjtrujy)
+As an example, we will use [PS2 Hello world](https://github.com/fjtrujy/helloWorldPS2) by [@fjtrujy](https://github.com/fjtrujy)
 
-in this [commit](https://github.com/israpps/helloWorldPS2/commit/80b118961605b565845d2a2fd943eb7d2bbc0435) you can see the applied changes. quite easy don't you think?
+in this [commit](https://github.com/israpps/helloWorldPS2/commit/e6899b8d8f474f6b999ea9fdee43ed3d3ac83e1e) you can see the applied changes. quite easy don't you think?
 
 to take a cleaner look, look at the `Makefile`, `dprintf_macro.h` and `main.c` on [that branch](https://github.com/israpps/helloWorldPS2/tree/ee-sio) directly
 
