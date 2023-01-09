@@ -1,6 +1,6 @@
 define HEADER 
-/_/_/_/_/_/_/_/_/_/_/
-|                   |/ 
+ _/_/_/_/_/_/_/_/_/_/
+|.                  |/ 
 |    _____  _____   |/ 
 |   |      |        |/ 
 |   |_____ |_____   |/ 
@@ -9,7 +9,7 @@ define HEADER
 |                   |/ 
 |___________________|/ SIOCookie
 
-written by El_isra. Idea from uyjulian
+Coded by El_isra. Idea from uyjulian
 
 endef
 export HEADER

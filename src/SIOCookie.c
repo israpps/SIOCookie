@@ -1,5 +1,4 @@
 #include "SIOCookie.h"
-#include <kernel.h>
 #include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -49,7 +48,7 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
     EE_SIO = fopencookie(&EE_SIO_COOKIE, "w+", COOKIE_FNCTS);
     if (EE_SIO == NULL) {
         DPRINTF("EE_SIO stream is NULL\n");
-        return COOKIE_OPEN_IS_NULL;
+        return EESIO_COOKIE_OPEN_IS_NULL;
     }
     setvbuf(EE_SIO, EE_SIO_COOKIE.buf, _IONBF, EE_SIO_COOKIE.allocated); // no buffering for this bad boy
     return EESIO_SUCESS;
