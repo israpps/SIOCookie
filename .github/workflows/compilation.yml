@@ -31,6 +31,11 @@ jobs:
         echo "sha8=$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_OUTPUT
         echo "date=$(date +%d-%m-%Y)" >> $GITHUB_OUTPUT
 
+    
+    - name: pack project
+      run: |
+        7z a -t7z ${{ github.event.repository.name }}.7z SIOCookie*.a LICENSE README.md include/SIOCookie.h
+
     - name: Upload artifacts
       if: ${{ success() }}
       uses: actions/upload-artifact@v3
@@ -46,4 +51,4 @@ jobs:
         automatic_release_tag: "latest"
         title: "Latest SIOCookie.a"
         files: |
-               SIOCookie*.a
+               ${{ github.event.repository.name }}.7z
