@@ -19,8 +19,8 @@ FILE *EE_SIO;
 
 ssize_t cookie_sio_write(void *c, const char *buf, size_t size);
 ssize_t cookie_sio_read(void *c, char *buf, size_t size);
-int cookie_sio_seek(void *c, _off64_t *offset, int whence);
-int cookie_sio_close(void *c);
+//int cookie_sio_seek(void *c, _off64_t *offset, int whence);
+//int cookie_sio_close(void *c);
 cookie_io_functions_t COOKIE_FNCTS;
 
 struct memfile_cookie  {
@@ -42,8 +42,8 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
     EE_SIO_COOKIE.endpos = 0;
     
     COOKIE_FNCTS.read = cookie_sio_read;
-    COOKIE_FNCTS.close = cookie_sio_close;
-    COOKIE_FNCTS.seek = cookie_sio_seek;
+    COOKIE_FNCTS.close = NULL;
+    COOKIE_FNCTS.seek = NULL;
     COOKIE_FNCTS.write = cookie_sio_write;
     EE_SIO = fopencookie(&EE_SIO_COOKIE, "w+", COOKIE_FNCTS);
     if (EE_SIO == NULL) {
@@ -66,7 +66,7 @@ ssize_t cookie_sio_read(void *c, char *buf, size_t size)
     DPRINTF("%s: start", __func__);
     return sio_read(buf, size);
 }
-
+/*
 int cookie_sio_seek(void *c, _off64_t *offset, int whence)
 {
     DPRINTF("%s: start", __func__);
@@ -77,4 +77,4 @@ int cookie_sio_close(void *c)
 {
     DPRINTF("%s: start", __func__);
     return 0;
-}
+} */
