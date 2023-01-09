@@ -1,6 +1,6 @@
 define HEADER 
-/_/_/_/_/_/_/_/_/_/_/
-|                   |/ 
+ _/_/_/_/_/_/_/_/_/_/
+|.                  |/ 
 |    _____  _____   |/ 
 |   |      |        |/ 
 |   |_____ |_____   |/ 
@@ -9,7 +9,7 @@ define HEADER
 |                   |/ 
 |___________________|/ SIOCookie
 
-written by El_isra. Idea from uyjulian
+Coded by El_isra. Idea from uyjulian
 
 endef
 export HEADER
@@ -22,6 +22,7 @@ EE_LIB = SIOCookie.a
 EE_OBJS = src/SIOCookie.o
 EE_CFLAGS += -fdata-sections -ffunction-sections
 EE_LDFLAGS += -Wl,--gc-sections
+EE_INCS += -Iinclude
 
 ifeq ($(DEBUG), 1)
   EE_CFLAGS += -DDEBUG -O0 -g
@@ -31,7 +32,7 @@ else
 endif
 
 all: $(EE_LIB)
-	echo "$$HEADER"
+	@echo "$$HEADER"
 
 clean:
 	rm -rf $(EE_OBJS) $(EE_LIB)
