@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sio.h>
 
-#ifdef DEBUG
+#ifdef SIO_COOKIE_DEBUG
 int printf(const char *format, ...);
 #define DPRINTF(X...) printf(X)
 #else
