@@ -66,6 +66,7 @@ int main()
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
     }
+    setvbuf(EE_SIO, EE_SIO_COOKIE.buf, _IONBF, EE_SIO_COOKIE.allocated); // no buffering for this bad boy
     while (1) {
         fprintf(EE_SIO, "EE SIO fprintf with fopencookie!\n");
         //fputs("EE_SIO fputs()\n", EE_SIO);
