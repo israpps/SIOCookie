@@ -14,11 +14,11 @@ Coded by El_isra. Idea from uyjulian
 endef
 export HEADER
 
-EE_LIB = SIOCookie.a
+EE_LIB = libsiocookie.a
 EE_OBJS = src/SIOCookie.o
 EE_CFLAGS += -fdata-sections -ffunction-sections
 EE_LDFLAGS += -Wl,--gc-sections
-EE_INCS += -Iinclude
+EE_INCS += -I./include
 
 ifeq ($(DEBUG), 1)
   EE_CFLAGS += -DDEBUG -O0 -g
@@ -32,6 +32,13 @@ all: $(EE_LIB)
 
 clean:
 	rm -rf $(EE_OBJS) $(EE_LIB)
+
+
+install: all
+	mkdir -p $(DESTDIR)$(PS2SDK)/ports/include/
+	mkdir -p $(DESTDIR)$(PS2SDK)/ports/lib
+	cp -f $(EE_LIB) $(DESTDIR)$(PS2SDK)/ports/lib
+	cp -f include/*.h $(DESTDIR)$(PS2SDK)/ports/include/
 
 rebuild: clean all
 
