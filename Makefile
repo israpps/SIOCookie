@@ -15,10 +15,6 @@ endef
 export HEADER
 
 EE_LIB = SIOCookie.a
-
-# KERNEL_NOPATCH = 1
-# NEWLIB_NANO = 1
-
 EE_OBJS = src/SIOCookie.o
 EE_CFLAGS += -fdata-sections -ffunction-sections
 EE_LDFLAGS += -Wl,--gc-sections
