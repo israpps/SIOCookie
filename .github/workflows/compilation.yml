@@ -34,14 +34,14 @@ jobs:
     
     - name: pack project
       run: |
-        7z a -t7z ${{ github.event.repository.name }}.7z SIOCookie*.a LICENSE README.md include/SIOCookie.h
+        7z a -t7z ${{ github.event.repository.name }}.7z *.a LICENSE README.md include/SIOCookie.h
 
     - name: Upload artifacts
       if: ${{ success() }}
       uses: actions/upload-artifact@v3
       with:
         name: ${{ github.event.repository.name }}-${{ steps.slug.outputs.sha8 }}-${{ steps.slug.outputs.date }}
-        path: SIOCookie*.a
+        path: '*.a'
 
     - name: Create release
       if: github.ref == 'refs/heads/main'
