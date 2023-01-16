@@ -15,7 +15,7 @@ ssize_t cookie_sio_read(void *c, char *buf, size_t size);
 // int cookie_sio_seek(void *c, _off64_t *offset, int whence);
 // int cookie_sio_close(void *c);
 
-int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umode, int vbuftype)
+int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umode)
 {
     sio_init(baudrate, lcr_ueps, lcr_upen, lcr_usbl, lcr_umode);
 
@@ -28,8 +28,8 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
         printf("EE_SIO stream is NULL\n");
         return EESIO_COOKIE_OPEN_IS_NULL;
     }
-    setvbuf(EE_SIO, NULL, _IONBF, NULL); // no buffering for this bad boy
-    fprintf(EE_SIO, "%s: finished", __func__);
+    setvbuf(EE_SIO, NULL, _IONBF, 0); // no buffering for this bad boy
+    fprintf(EE_SIO, "%s: finished\n", __func__);
     return EESIO_SUCESS;
 }
 
