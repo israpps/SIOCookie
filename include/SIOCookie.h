@@ -15,7 +15,7 @@
  * @returns 0 on success, nonzero on error. see EE_SIO_START_RETCODES enum for further details
  * @see EE_SIO_START_RETCODES, https://en.cppreference.com/w/c/io/setvbuf
  */
-int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umode, int vbuftype);
+int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umode);
 
 /**
  * @brief Return values for ee_sio_start
