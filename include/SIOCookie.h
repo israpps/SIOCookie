@@ -1,7 +1,6 @@
 #ifndef SIO_COOKIE_H
 #define SIO_COOKIE_H
 
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <kernel.h>
 
