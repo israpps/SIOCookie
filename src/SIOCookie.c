@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "SIOCookie.h"
 #include <sys/types.h>
 #include <stdlib.h>
