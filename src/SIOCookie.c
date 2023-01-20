@@ -25,7 +25,10 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
     COOKIE_FNCTS.write = cookie_sio_write;
     EE_SIO = fopencookie(NULL, "w+", COOKIE_FNCTS);
     if (hook_stdout)
+    {
         stdout = fopencookie(NULL, "w+", COOKIE_FNCTS);
+        setvbuf(stdout, NULL, _IONBF, 0); // no buffering
+    }
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
         return EESIO_COOKIE_OPEN_IS_NULL;
