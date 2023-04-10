@@ -23,15 +23,15 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
     COOKIE_FNCTS.close = NULL;
     COOKIE_FNCTS.seek = NULL;
     COOKIE_FNCTS.write = cookie_sio_write;
-    EE_SIO = fopencookie(NULL, "w+", COOKIE_FNCTS);
+    EE_SIO = fopencookie(NULL, "w", COOKIE_FNCTS);
     if (hook_stdout)
     {
         fprintf(EE_SIO, "%s: hooking std streams...\n", __func__);
         fprintf(EE_SIO, "\tstdout...\n");
-        stdout = fopencookie(NULL, "w+", COOKIE_FNCTS);
+        stdout = fopencookie(NULL, "w", COOKIE_FNCTS);
         setvbuf(stdout, NULL, _IONBF, 0); // no buffering
         fprintf(EE_SIO, "\tstderr...\n");
-        stderr = fopencookie(NULL, "w+", COOKIE_FNCTS);
+        stderr = fopencookie(NULL, "w", COOKIE_FNCTS);
         setvbuf(stderr, NULL, _IONBF, 0); // no buffering
     }
     if (EE_SIO == NULL) {
