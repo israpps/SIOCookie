@@ -9,7 +9,7 @@
 // GLOBAL
 FILE *EE_SIO;
 cookie_io_functions_t COOKIE_FNCTS;
-
+char bf[16];
 ssize_t cookie_sio_write(void *c, const char *buf, size_t size);
 ssize_t cookie_sio_read(void *c, char *buf, size_t size);
 // int cookie_sio_seek(void *c, _off64_t *offset, int whence);
@@ -29,16 +29,16 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
         fprintf(EE_SIO, "%s: hooking std streams...\n", __func__);
         fprintf(EE_SIO, "\tstdout...\n");
         stdout = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stdout, NULL, _IONBF, 0); // no buffering
+        setvbuf(stdout, bf, _IONBF, 16); // no buffering
         fprintf(EE_SIO, "\tstderr...\n");
         stderr = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stderr, NULL, _IONBF, 0); // no buffering
+        setvbuf(stderr, bf, _IONBF, 16); // no buffering
     }
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
         return EESIO_COOKIE_OPEN_IS_NULL;
     }
-    setvbuf(EE_SIO, NULL, _IONBF, 0); // no buffering for this bad boy
+    setvbuf(EE_SIO, bf, _IONBF, 16); // no buffering for this bad boy
     fprintf(EE_SIO, "%s: finished\n", __func__);
     return EESIO_SUCESS;
 }
