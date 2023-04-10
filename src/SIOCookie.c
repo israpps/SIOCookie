@@ -34,13 +34,13 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
         sio_putsn("hooking std streams...\n");
         sio_putsn("\tstdout...\n");
         stdout = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stdout, NULL, _IONBF, 0); // no buffering
+        setvbuf(stdout, NULL, _IOFBF, 0); // no buffering
         sio_putsn("\treplacing stderr with stdout...\n");
         stderr = stdout;
         sio_putsn("\treplacing EE_SIO with stdout...\n");
         EE_SIO = stdout;
     } else {
-        setvbuf(EE_SIO, NULL, _IONBF, 0); // no buffering for this bad boy
+        setvbuf(EE_SIO, NULL, _IOFBF, 0); // no buffering for this bad boy
     }
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
