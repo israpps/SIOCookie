@@ -29,16 +29,16 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
         fprintf(EE_SIO, "%s: hooking std streams...\n", __func__);
         fprintf(EE_SIO, "\tstdout...\n");
         stdout = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stdout, bf, _IONBF, 16); // no buffering
+        setvbuf(stdout, bf, _IOFBF, 16); // no buffering
         fprintf(EE_SIO, "\tstderr...\n");
         stderr = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stderr, bf, _IONBF, 16); // no buffering
+        setvbuf(stderr, bf, _IOFBF, 16); // no buffering
     }
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
         return EESIO_COOKIE_OPEN_IS_NULL;
     }
-    setvbuf(EE_SIO, bf, _IONBF, 16); // no buffering for this bad boy
+    setvbuf(EE_SIO, bf, _IOFBF, 16); // no buffering for this bad boy
     fprintf(EE_SIO, "%s: finished\n", __func__);
     return EESIO_SUCESS;
 }
