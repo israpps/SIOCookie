@@ -9,7 +9,6 @@
 // GLOBAL
 FILE *EE_SIO;
 cookie_io_functions_t COOKIE_FNCTS;
-char bf[16];
 ssize_t cookie_sio_write(void *c, const char *buf, size_t size);
 ssize_t cookie_sio_read(void *c, char *buf, size_t size);
 // int cookie_sio_seek(void *c, _off64_t *offset, int whence);
@@ -32,7 +31,7 @@ int ee_sio_start(u32 baudrate, u8 lcr_ueps, u8 lcr_upen, u8 lcr_usbl, u8 lcr_umo
         setvbuf(stdout, NULL, _IOFBF, 0); // no buffering
         fprintf(EE_SIO, "\tstderr...\n");
         stderr = fopencookie(NULL, "w", COOKIE_FNCTS);
-        setvbuf(stderr, NULL, _IOFBF, 0); // no buffering
+        //setvbuf(stderr, NULL, _IOFBF, 0); // no buffering
     }
     if (EE_SIO == NULL) {
         printf("EE_SIO stream is NULL\n");
